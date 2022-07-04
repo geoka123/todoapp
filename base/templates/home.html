@@ -1,0 +1,25 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% if not user.is_authenticated %}
+<div class="header_bar">
+<h1>Welcome to my Todo app!</h1>
+</div>
+
+<br>
+
+<div class="btn">
+<button type="submit" value="Log In"><a href="login">Log In</a></button>
+</div>
+
+<h2>Or</h2>
+
+<div class="btn">
+<button type="submit" value="Sign Up"><a href="signup/">Sign Up</a></button>
+</div>
+
+{% else %}
+<p>Go to <a href="{% url 'tasklist' %}">your task list</a> or <a href="{% url 'logout' %}">logout</a>.</p>
+
+{% endif %}
+{% endblock %}

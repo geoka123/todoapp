@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <head>
+        <title>Task List</title>
+        <style>
+            .task_class {text-decoration: line-through;}
+        </style>
+    </head>
+
+    <body>
+        <div style="background-color: gray;">
+            <a href="{% url 'taskcreate' %}" style="color: #fff;">Create</a>
+            <a href="{% url 'logout' %}" style="color: #fff;">Log Out</a>
+        </div>
+        <div class="header_bar">
+            <h1>My task list</h1>
+        </div>
+        <br>
+        <table>
+            <tr>
+                <th>Item</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                {% if not task.complete %}
+                    <td>{{task.title}}</td>
+                    <td><a href="{% url 'taskdelete' task.id %}">Delete</a></td>
+                    <td><a href="{% url 'taskcomplete' task.id %}">Done</a></td>
+                {% else %}
+                    <td class="task_class">{{task.title}}</td>
+                    <td><a href="{% url 'taskdelete' task.id %}">Delete</a></td>
+                    <td><a href="{% url 'taskuncomplete' task.id %}">Not Done</a></td>
+                {% endif %}
+            </tr>
+            {% empty %}
+                <h3>No items in list </h3>
+            {% endfor %}
+        </table>
+    </body>
+{% endblock %}
